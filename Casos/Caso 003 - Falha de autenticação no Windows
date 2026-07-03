@@ -1,0 +1,32 @@
+# Caso 003 - Falha de autenticação no Windows
+
+## Resumo
+
+Durante o laboratório Blue Team, foram geradas tentativas de autenticação inválidas no Windows Endpoint utilizando o comando `runas`. O Wazuh detectou as tentativas como falha de logon por usuário desconhecido ou senha incorreta.
+
+---
+
+## Ambiente
+
+- SIEM/XDR: Wazuh
+- Endpoint: Windows-Endpoint
+- Fonte de log: Windows Security Event Log
+- Provider: Microsoft-Windows-Security-Auditing
+- Event ID: 4625
+- Ambiente: VirtualBox
+
+---
+## O que foi observado
+
+Durante o teste, foram realizadas múltiplas tentativas de autenticação com o usuário `labuser` utilizando o comando `runas`.
+
+No PowerShell, foi exibido o erro:
+
+```text
+ERRO RUNAS: não é possível executar - cmd
+1326: Nome de usuário ou senha incorretos.
+## Comando utilizado
+
+```powershell
+runas /user:labuser cmd
+runas /user:.\labuser cmd
